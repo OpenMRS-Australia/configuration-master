@@ -1,30 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="53">
-  <pipelines group="TwitterFeed">
-    <pipeline name="WebApplication" isLocked="true">
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="55">
+  <server artifactsdir="artifacts" serverId="106df03c-634c-4857-92a6-af150fbbb0d7" />
+  <pipelines group="OpenMRS-CPM">
+    <pipeline name="CPM-Module" isLocked="true">
       <materials>
-        <git url="https://github.com/nigelfds/aws-twitter-feed" />
+        <git url="https://github.com/johnsyweb/openmrs-cpm.git" />
       </materials>
-      <stage name="Specs">
-        <jobs>
-          <job name="Specs">
-            <tasks>
-              <exec command="./go" args="spec format=junit" />
-            </tasks>
-            <artifacts>
-              <test src="build-output/test-reports" />
-            </artifacts>
-          </job>
-        </jobs>
-      </stage>
       <stage name="Package">
         <jobs>
           <job name="Package">
             <tasks>
-              <exec command="./go" args="package" />
+              <exec command="mvn" args="package" />
             </tasks>
             <artifacts>
-              <artifact src="aws-twitter-feed-*.rpm" dest="rpms" />
+              <artifact src="cpm-*.omod" dest="omod" />
             </artifacts>
           </job>
         </jobs>
@@ -37,7 +26,7 @@
         </variable>
       </environmentvariables>
       <materials>
-        <git url="https://github.com/nigelfds/configuration-master" />
+        <git url="https://github.com/khaong/configuration-master" />
       </materials>
       <stage name="PuppetSyntax">
         <jobs>
@@ -68,7 +57,7 @@
         </variable>
       </environmentvariables>
       <materials>
-        <pipeline pipelineName="WebApplication" stageName="Package" materialName="upstreamArtifactApp" />
+        <pipeline pipelineName="CPM-Module" stageName="Package" materialName="upstreamArtifactApp" />
         <pipeline pipelineName="Infrastructure" stageName="Package" materialName="upstreamArtifactConfiguration" />
         <git url="https://github.com/nigelfds/configuration-master" />
       </materials>
@@ -99,41 +88,6 @@
             <artifacts>
               <artifact src="build/image" dest="build" />
             </artifacts>
-          </job>
-        </jobs>
-      </stage>
-    </pipeline>
-    <pipeline name="ProductionDeploy" labeltemplate="${upstreamArtifactSystest}">
-      <environmentvariables>
-        <variable name="SETTINGS_FILE">
-          <value>/tmp/boot/puppet/settings.yaml</value>
-        </variable>
-      </environmentvariables>
-      <materials>
-        <pipeline pipelineName="SystemIntegration" stageName="CreateImage" materialName="upstreamArtifactSystest" />
-        <git url="https://github.com/nigelfds/configuration-master" materialName="configurationMaster" />
-      </materials>
-      <stage name="UpdateImage">
-        <approval type="manual" />
-        <jobs>
-          <job name="UpdateImage">
-            <tasks>
-              <exec command="./go">
-                <arg>aws:deploy_to_production</arg>
-              </exec>
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-      <stage name="RollNewVersion">
-        <jobs>
-          <job
-            name="RollNewVersion">
-            <tasks>
-              <exec command="./go">
-                <arg>aws:roll_new_version</arg>
-              </exec>
-            </tasks>
           </job>
         </jobs>
       </stage>
