@@ -66,7 +66,7 @@
       <materials>
         <pipeline pipelineName="CPM-Module" stageName="Package" materialName="upstreamArtifactApp" />
         <pipeline pipelineName="Infrastructure" stageName="Package" materialName="upstreamArtifactConfiguration" />
-        <git url="https://github.com/nigelfds/configuration-master" />
+        <git url="https://github.com/khaong/configuration-master" />
       </materials>
       <stage name="BuildAppServer">
         <jobs>

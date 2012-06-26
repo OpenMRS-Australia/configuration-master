@@ -6,8 +6,8 @@ module Go
       super
     end
 
-    def aws_twitter_feed_artifact
-      artifact_location "APP", "package", "rpms"
+    def cpm_module_artifact
+      artifact_location "CPM-Module", "package", "omod/target"
     end
 
     def configuration_master_artifact

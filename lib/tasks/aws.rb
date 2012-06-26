@@ -36,7 +36,7 @@ namespace :aws do
   task :build_appserver => BUILD_DIR do
     pipeline = Go::SystemIntegrationPipeline.new
     puppet_bootstrap = Ops::PuppetBootstrap.new(:role => "appserver",
-                                                :facter => { :artifact => pipeline.aws_twitter_feed_artifact },
+                                                :facter => { :artifact => pipeline.cpm_module_artifact },
                                                 :boot_package_url => pipeline.configuration_master_artifact)
 
     stack = Ops::Stacks.new("appserver-validation",
