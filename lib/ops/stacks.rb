@@ -48,7 +48,7 @@ module Ops
 
     def delete!
       stack = AWS::CloudFormation.new.stacks[@name]
-      (puts "couldn't find stack" and return) unless stack.exists?
+      (puts "did not delete: couldn't find stack [#{@name}]" and return) unless stack.exists?
 
       stack.delete
       sleep 30 while stack.exists?
