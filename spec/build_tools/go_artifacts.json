@@ -1,0 +1,35 @@
+[ {
+  "name": "cruise-output",
+  "url": "http://ec2-50-112-42-202.us-west-2.compute.amazonaws.com:8153/go/files/CPM-Module/14/Package/1/Package/cruise-output",
+  "type": "folder",
+  "files": [
+    { "name": "console.log",
+      "url": "http://ec2-50-112-42-202.us-west-2.compute.amazonaws.com:8153/go/files/CPM-Module/14/Package/1/Package/cruise-output/console.log",
+      "type": "file" },
+    { "name": "md5.checksum",
+      "url": "http://ec2-50-112-42-202.us-west-2.compute.amazonaws.com:8153/go/files/CPM-Module/14/Package/1/Package/cruise-output/md5.checksum",
+      "type": "file" }] },
+  { "name": "omod",
+    "url": "http://ec2-50-112-42-202.us-west-2.compute.amazonaws.com:8153/go/files/CPM-Module/14/Package/1/Package/omod",
+    "type": "folder",
+    "files": [
+      { "name": "target",
+        "url": "http://ec2-50-112-42-202.us-west-2.compute.amazonaws.com:8153/go/files/CPM-Module/14/Package/1/Package/omod/target",
+        "type": "folder",
+        "files": [
+          { "name": "cpm-1.0-SNAPSHOT-SHA1-389e41c.omod",
+            "url": "http://ec2-50-112-42-202.us-west-2.compute.amazonaws.com:8153/go/files/CPM-Module/14/Package/1/Package/omod/target/cpm-1.0-SNAPSHOT-SHA1-389e41c.omod",
+            "type": "file" },
+          { "name": "foobar",
+            "url": "http://somewhere-i-dont-want-to-go",
+            "type": "folder",
+            "files": [
+              { "name": "stuffs.xml",
+                "url": "http://stuffs.xml",
+                "type": "file" }]
+          }
+        ]
+      }
+    ]
+  }
+]

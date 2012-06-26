@@ -4,12 +4,12 @@ namespace :test do
     puts "puppet syntax check ok"
   end
 
-  namespace :twitter_feed do
+  namespace :build_tools do
 
     require 'rspec/core/rake_task'
 
-    RSpec::Core::RakeTask.new(:health_check) do |t|
-      t.pattern = "spec/twitter_feed_app/**/*_spec.rb"
+    RSpec::Core::RakeTask.new(:spec) do |t|
+      t.pattern = "spec/build_tools/**/*_spec.rb"
     end
   end
 
