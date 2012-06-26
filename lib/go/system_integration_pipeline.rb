@@ -7,7 +7,7 @@ module Go
     end
 
     def cpm_module_artifact
-      artifact_location "CPM-Module", "package", "target"
+      artifact_location "APP", "package", "target"
     end
 
     def configuration_master_artifact
