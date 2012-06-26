@@ -1,5 +1,5 @@
 class appserver {
-  include twitterfeed
   include newrelic
+  include jdk
 }
 include appserver

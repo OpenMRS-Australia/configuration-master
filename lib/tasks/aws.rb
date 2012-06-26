@@ -83,7 +83,7 @@ namespace :aws do
   end
 
   def setup_bootstrap
-    bucket_name = "aws-twitter-stream-bootstrap-bucket-#{SETTINGS.aws_ssh_key_name}"
+    bucket_name = "bootstrap-bucket-#{SETTINGS.aws_ssh_key_name}"
     Ops::BootstrapPackage.new("#{BUILD_DIR}/#{BOOTSTRAP_FILE}", bucket_name).url
   end
 end

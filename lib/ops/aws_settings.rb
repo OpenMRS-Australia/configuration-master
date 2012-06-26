@@ -22,7 +22,11 @@ module Ops
     end
 
     def setup_cred
-      AWS.config(:access_key_id => @settings["aws_access_key"], :secret_access_key => @settings["aws_secret_access_key"])
+      AWS.config(
+        :access_key_id => @settings["aws_access_key"], 
+        :secret_access_key => @settings["aws_secret_access_key"],
+        :cloud_formation_endpoint => "cloudformation.us-west-2.amazonaws.com"
+        )
     end
   end
 end

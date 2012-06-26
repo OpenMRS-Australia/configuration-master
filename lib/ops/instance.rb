@@ -8,7 +8,7 @@ module Ops
 
     def create_image(name)
       ec2 = AWS::EC2.new
-      image = ec2.images.create(:instance_id => @instance_id, :name => "aws-twitter-feed-#{name}")
+      image = ec2.images.create(:instance_id => @instance_id, :name => "openmrs-cpm-#{name}")
       sleep 1 until image.state.to_s.eql? "available"
       image.id
     end

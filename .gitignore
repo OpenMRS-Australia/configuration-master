@@ -1,3 +1,4 @@
+*.pem
 build
 settings.yaml
 .idea

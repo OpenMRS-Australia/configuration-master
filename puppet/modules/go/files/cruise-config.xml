@@ -2,18 +2,25 @@
 <cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="55">
   <server artifactsdir="artifacts" serverId="106df03c-634c-4857-92a6-af150fbbb0d7" />
   <pipelines group="OpenMRS-CPM">
-    <pipeline name="CPM-Module" isLocked="true">
+    <pipeline name="CPM-Module" labeltemplate="${COUNT}-${git}" isLocked="true">
+      <environmentvariables>
+        <variable name="JAVA_HOME">
+          <value>/usr/java/latest</value>
+        </variable>
+      </environmentvariables>
       <materials>
-        <git url="https://github.com/johnsyweb/openmrs-cpm.git" />
+        <git url="https://github.com/johnsyweb/openmrs-cpm.git" materialName="git" />
       </materials>
       <stage name="Package">
         <jobs>
           <job name="Package">
             <tasks>
-              <exec command="mvn" args="package" />
+              <exec command="./go" args="clean package">
+                <runif status="passed" />
+              </exec>
             </tasks>
             <artifacts>
-              <artifact src="cpm-*.omod" dest="omod" />
+              <artifact src="**/cpm-*.omod" />
             </artifacts>
           </job>
         </jobs>
@@ -94,4 +101,3 @@
     </pipeline>
   </pipelines>
 </cruise>
-
