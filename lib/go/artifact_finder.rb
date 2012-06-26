@@ -8,7 +8,6 @@ class ArtifactFinder
   def uri(path)
     begin
       directories = path.split('/')
-
       directories.reduce(json){ |tree, directory| find_element(tree, directory) }.first["url"]
     rescue => e
       raise "Could not find an artifact for #{path} => #{e.message}"

@@ -1,6 +1,7 @@
 require "uri"
 require "json"
 require "net/http"
+require "go/artifact_finder"
 
 module Go
   class Pipeline
@@ -14,7 +15,7 @@ module Go
       puts "Fetching artifact from #{uri}"
       response = Net::HTTP.get_response(URI(uri))
       json = JSON.parse(response.body)
-      json.find { |element| element["name"].eql? artifact_dir }["files"].first["url"]
+      ArtifactFinder.new(json).uri(artifact_dir)
     end
 
     def hostname
