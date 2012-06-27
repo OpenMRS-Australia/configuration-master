@@ -1,4 +1,5 @@
 namespace :package do
+  desc "package up the puppet manifests"
   task :puppet do
     mkdir_p "#{BUILD_DIR}/package"
     cp_r "puppet", "#{BUILD_DIR}/package/puppet"
