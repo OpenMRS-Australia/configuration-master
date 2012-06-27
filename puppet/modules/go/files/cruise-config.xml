@@ -81,7 +81,7 @@
         <jobs>
           <job name="VerifyAppHealth">
             <tasks>
-              <exec command="./go" args="test:twitter_feed:health_check" />
+              <exec command="./go" args="test:openmrs:health_check" />
             </tasks>
           </job>
         </jobs>
