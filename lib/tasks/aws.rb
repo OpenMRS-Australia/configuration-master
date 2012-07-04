@@ -25,6 +25,21 @@ namespace :aws do
     end
   end
 
+  desc "creates the AutoTest environment"
+  task :autotest_start => ["clean", "package:puppet"] do
+    puppet_bootstrap = Ops::PuppetBootstrap.new(:role => "appserver",
+                                                :boot_package_url => setup_bootstrap)
+    stacks = Ops::Stacks.new("autotest",
+                             "KeyName" => settings.aws_ssh_key_name,
+                             "BootScript" => puppet_bootstrap.script)
+
+    puts "booting the AutoTest environment"
+    stacks.create do |stack|
+      instance = stack.outputs.find { |output| output.key == "PublicAddress" }
+      puts "your AutoTest server's address is #{instance.value}"
+    end
+  end
+
   desc "stops the CI environment"
   task :ci_stop do
     puts "stopping the CI environment"
