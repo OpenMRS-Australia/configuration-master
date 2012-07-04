@@ -9,14 +9,13 @@ require "lib/go/system_integration_pipeline"
 require "lib/go/production_deploy_pipeline"
 
 namespace :aws do
-  SETTINGS = Ops::AWSSettings.load
 
   desc "creates the CI environment"
   task :ci_start => ["clean", "package:puppet"] do
     puppet_bootstrap = Ops::PuppetBootstrap.new(:role => "buildserver",
                                                 :boot_package_url => setup_bootstrap)
     stacks = Ops::Stacks.new("ci-environment",
-                             "KeyName" => SETTINGS.aws_ssh_key_name,
+                             "KeyName" => settings.aws_ssh_key_name,
                              "BootScript" => puppet_bootstrap.script)
 
     puts "booting the CI environment"
@@ -40,7 +39,7 @@ namespace :aws do
                                                 :boot_package_url => pipeline.configuration_master_artifact)
 
     stack = Ops::Stacks.new("appserver-validation",
-                            "KeyName" => SETTINGS.aws_ssh_key_name,
+                            "KeyName" => settings.aws_ssh_key_name,
                             "BootScript" => puppet_bootstrap.script)
     stack.delete!
     stack.create
@@ -66,7 +65,7 @@ namespace :aws do
     puts "updating production configuration with image '#{image_id}'"
 
     stack = Ops::Stacks.new("production-environment",
-                            "KeyName" => SETTINGS.aws_ssh_key_name,
+                            "KeyName" => settings.aws_ssh_key_name,
                             "ImageId" => image_id)
     stack.create_or_update
   end
@@ -82,8 +81,12 @@ namespace :aws do
     puts "new version updated successfuly"
   end
 
+  def settings
+    @settings ||= Ops::AWSSettings.load
+  end
+
   def setup_bootstrap
-    bucket_name = "bootstrap-bucket-#{SETTINGS.aws_ssh_key_name}"
+    bucket_name = "bootstrap-bucket-#{settings.aws_ssh_key_name}"
     Ops::BootstrapPackage.new("#{BUILD_DIR}/#{BOOTSTRAP_FILE}", bucket_name).url
   end
 end
