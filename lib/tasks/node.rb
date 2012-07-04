@@ -5,12 +5,13 @@ require "capistrano/configuration/variables"
 namespace :node do
 
   desc "apply puppet infrastructure changes to target hosts"
-  task :puppet_apply, [:noop] => ['clean', 'package:puppet'] do |task, args|
+  task :puppet_apply, [:noop] => ['clean', 'test:puppet_syntax','package:puppet'] do |task, args|
     settings = Ops::AWSSettings.load
     bootstrap_url = Ops::BootstrapPackage.new("#{BUILD_DIR}/#{BOOTSTRAP_FILE}", settings.bucket_name).url
     puppet_bootstrap = Ops::PuppetBootstrap.new(:role => "buildserver",
-                                                :boot_package_url => bootstrap_url)
-    cap :puppet_apply, :script => puppet_bootstrap.script, :noop => args[:noop]
+                                                :boot_package_url => bootstrap_url,
+                                                :noop => args[:noop] == 'noop')
+    cap :puppet_apply, :script => puppet_bootstrap.script
   end
 
   def cap(task, *args)
