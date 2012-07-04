@@ -3,14 +3,36 @@ require "capistrano/cli"
 require "capistrano/configuration/variables"
 
 namespace :node do
+  roles = {
+    "ci-environment" => "buildserver",
+    "autotest" => "appserver"
+  }
+
+  task :list do
+    Ops::AWSSettings.load
+    roles.each do |k,v|
+      puts "#{k}:"
+      Ops::Stacks.new(k).instances.each { |i| puts "  #{i.url}" }
+    end
+  end
 
   desc "apply puppet infrastructure changes to target hosts"
-  task :puppet_apply, [:noop] => ['clean', 'test:puppet_syntax','package:puppet'] do |task, args|
+  task :update_ci, [:noop] => ['clean', 'test:puppet_syntax','package:puppet'] do |task, args|
     settings = Ops::AWSSettings.load
+    ENV['HOSTS'] = Ops::Stacks.new("ci-environment").instances.collect {|i| i.url}.join(",")
     bootstrap_url = Ops::BootstrapPackage.new("#{BUILD_DIR}/#{BOOTSTRAP_FILE}", settings.bucket_name).url
     puppet_bootstrap = Ops::PuppetBootstrap.new(:role => "buildserver",
                                                 :boot_package_url => bootstrap_url,
                                                 :noop => args[:noop] == 'noop')
+    cap :puppet_apply, :script => puppet_bootstrap.script
+  end
+
+  task :update_autotest => ['clean', 'test:puppet_syntax','package:puppet'] do |task, args|
+    Ops::AWSSettings.load
+    ENV['HOSTS'] = Ops::Stacks.new("autotest").instances.collect {|i| i.url}.join(",")
+    bootstrap_url = Ops::BootstrapPackage.new("#{BUILD_DIR}/#{BOOTSTRAP_FILE}", settings.bucket_name).url
+    puppet_bootstrap = Ops::PuppetBootstrap.new(:role => "appserver",
+                                                :boot_package_url => bootstrap_url)
     cap :puppet_apply, :script => puppet_bootstrap.script
   end
 
