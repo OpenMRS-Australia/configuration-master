@@ -10,7 +10,6 @@ class go::server {
 
   service { "go-server":
     ensure => "running",
-    subscribe => File["/etc/go/cruise-config.xml"],
     require => Package["go-server"],
   }
 

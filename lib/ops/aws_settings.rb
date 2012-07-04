@@ -21,6 +21,10 @@ module Ops
       @settings[symbol.to_s]
     end
 
+    def bucket_name
+      "bootstrap-bucket-#{@settings['aws_ssh_key_name']}"
+    end
+
     def setup_cred
       AWS.config(
         :access_key_id => @settings["aws_access_key"],

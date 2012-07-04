@@ -7,6 +7,7 @@ directory BUILD_DIR
 require "rake/clean"
 require "tasks/aws"
 require "tasks/test"
+require "tasks/node"
 require "tasks/package"
 require "rspec/core/rake_task"
 

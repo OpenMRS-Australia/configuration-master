@@ -4,7 +4,7 @@ curl "<%= boot_package_url %>" -o /tmp/boot.tar.gz
 
 yum install -y --nogpg http://yum.puppetlabs.com/el/5/products/i386/puppetlabs-release-5-1.noarch.rpm
 yum install -y puppet
-mkdir /tmp/boot
+mkdir -p /tmp/boot
 cd /tmp/boot
 tar zxf /tmp/boot.tar.gz
 cd /tmp/boot/puppet

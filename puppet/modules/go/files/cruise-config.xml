@@ -59,10 +59,10 @@
       <stage name="Publish">
         <jobs>
           <job name="Publish">
-            <fetchartifact pipeline="Infrastructure" stage="Package" job="Package" srcdir="build">
+            <tasks>
+              <fetchartifact pipeline="Infrastructure" stage="Package" job="Package" srcdir="build">
                 <runif status="passed" />
               </fetchartifact>
-            <tasks>
               <exec command="./go" args="aws:publish_bootstrap" />
             </tasks>
           </job>
