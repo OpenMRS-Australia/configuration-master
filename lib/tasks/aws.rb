@@ -81,6 +81,11 @@ namespace :aws do
     puts "new version updated successfuly"
   end
 
+  desc "publish bootstrap to AWS S3"
+  task :publish_bootstrap do
+    setup_bootstrap
+  end
+
   def settings
     @settings ||= Ops::AWSSettings.load
   end
