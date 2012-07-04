@@ -5212,5 +5212,6 @@ USE `test`;
 
 -- Dump completed on 2012-07-04 10:32:17
 
+flush privileges;
 grant all privileges on openmrs.* to 'openmrs_user'@'localhost' with GRANT OPTION;
 flush privileges;
