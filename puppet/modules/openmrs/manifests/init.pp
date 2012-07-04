@@ -7,10 +7,10 @@ define download($uri, $timeout = 300) {
 }
 
 class openmrs {
-  download { "/var/lib/tomcat6/webapps":
+  download { "/var/lib/tomcat6/webapps/openmrs.war":
     uri => "http://downloads.sourceforge.net/project/openmrs/releases/OpenMRS_1.9.0/openmrs.war",
     timeout => 900,
-    require => Service['tomcat6'],
+    require => Package['tomcat6'],
     notify => Service['tomcat6'],
   }
 

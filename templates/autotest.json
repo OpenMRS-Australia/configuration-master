@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
-  "Description" : "Creates a single application server instance for validation",
+  "Description" : "Creates a single openmrs server instance for testing",
 
   "Parameters" : {
     "KeyName" : {
@@ -66,6 +66,10 @@
     "PublicIP" : {
       "Description" : "Public IP address of the newly created EC2 instance",
       "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "PublicIp" ] }
+    },
+    "PublicAddress" : {
+      "Description" : "Public address of the newly created EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "Ec2Instance", "PublicDnsName" ] }
     }
   }
 }
