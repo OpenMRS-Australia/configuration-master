@@ -69,47 +69,5 @@
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="SystemIntegration" isLocked="true">
-      <environmentvariables>
-        <variable name="SETTINGS_FILE">
-          <value>/var/go/settings.yaml</value>
-        </variable>
-      </environmentvariables>
-      <materials>
-        <pipeline pipelineName="CPM-Module" stageName="Package" materialName="upstreamArtifactApp" />
-        <pipeline pipelineName="Infrastructure" stageName="Package" materialName="upstreamArtifactConfiguration" />
-        <git url="https://github.com/khaong/configuration-master" />
-      </materials>
-      <stage name="BuildAppServer">
-        <jobs>
-          <job name="BuildAppServer">
-            <tasks>
-              <exec command="./go" args="aws:build_appserver" />
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-      <stage name="VerifyAppHealth">
-        <jobs>
-          <job name="VerifyAppHealth">
-            <tasks>
-              <exec command="./go" args="test:openmrs:health_check" />
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-      <stage name="CreateImage">
-        <jobs>
-          <job name="CreateImage">
-            <tasks>
-              <exec command="./go" args="aws:create_image" />
-            </tasks>
-            <artifacts>
-              <artifact src="build/image" dest="build" />
-            </artifacts>
-          </job>
-        </jobs>
-      </stage>
-    </pipeline>
   </pipelines>
 </cruise>
