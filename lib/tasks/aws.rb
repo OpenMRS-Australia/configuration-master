@@ -9,6 +9,22 @@ require "lib/go/system_integration_pipeline"
 require "lib/go/production_deploy_pipeline"
 
 namespace :aws do
+  environments = {
+    "CI" => "ci-environment",
+    "AutoTest" => "autotest",
+    "QA" => "qa"
+  }
+
+
+  desc "List AWS Nodes"
+  task :list do
+    Ops::AWSSettings.load
+    environments.each do |key, env|
+      puts "#{env}:"
+      Ops::Stacks.new(env).instances.each { |i| puts "  #{i.url}" }
+    end
+  end
+
 
   desc "creates the CI environment"
   task :ci_start => ["clean", "package:puppet"] do
@@ -37,6 +53,24 @@ namespace :aws do
     stacks.create do |stack|
       instance = stack.outputs.find { |output| output.key == "PublicAddress" }
       puts "your AutoTest server's address is #{instance.value}"
+    end
+  end
+
+  desc "creates the QA environment"
+  task :qa_start => ["clean", "package:puppet"] do |task, args|
+    environment = "QA"
+    role = "appserver"
+    environment_label = "qa"
+    puppet_bootstrap = Ops::PuppetBootstrap.new(:role => role,
+                                                :boot_package_url => setup_bootstrap)
+    stacks = Ops::Stacks.new(environment_label,
+                             "KeyName" => settings.aws_ssh_key_name,
+                             "BootScript" => puppet_bootstrap.script)
+
+    puts "booting the #{environment} environment"
+    stacks.create do |stack|
+      instance = stack.outputs.find { |output| output.key == "PublicAddress" }
+      puts "your #{environment} server's address is #{instance.value}"
     end
   end
 

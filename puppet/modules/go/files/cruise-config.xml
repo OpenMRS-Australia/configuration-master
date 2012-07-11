@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="55">
-  <server artifactsdir="artifacts" serverId="106df03c-634c-4857-92a6-af150fbbb0d7" />
+  <server artifactsdir="artifacts" serverId="106df03c-634c-4857-92a6-af150fbbb0d7">
+    <license user="OpenMRS">XFME9J9EMiQYFddyOVzUXqqDf9VUd6c4ripA+0DLNqZzVudyysez4aiIftNM&#xD;
+wiCyWzy15KfpuGvpMtdjqY56AzASXny7L9IIAo9X21TPoTqAWhXGxTkBIF2b&#xD;
+ep7gguCDI/oVN7la7fUqR/VcuHD7mYBBzkep5esxalWyw+lM/R9KwiRHkSmT&#xD;
+EpqpgdeBV/p1I6Q4VqvV14oN+iU0sbHDhBd2x0I76JGrb0BhE7ZSOtfp69J4&#xD;
+PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
+6Dg3aBCkI2VdueM7piWbiurXbfesHs1dIX4KFvXLUw==</license>
+  </server>
   <pipelines group="OpenMRS-CPM">
     <pipeline name="CPM-Module" labeltemplate="${COUNT}-${git}" isLocked="true">
       <environmentvariables>
@@ -26,6 +33,43 @@
         </jobs>
       </stage>
     </pipeline>
+    <pipeline name="CI">
+      <materials>
+        <pipeline pipelineName="CPM-Module" stageName="Package" />
+        <pipeline pipelineName="Infrastructure" stageName="Publish" materialName="Infrastructure" />
+      </materials>
+      <stage name="deployment">
+        <jobs>
+          <job name="deploy">
+            <tasks>
+              <exec command="echo">
+                <arg>"Hello World"</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="QA">
+      <materials>
+        <pipeline pipelineName="CI" stageName="deployment" />
+      </materials>
+      <stage name="deployment">
+        <approval type="manual" />
+        <jobs>
+          <job name="deployment">
+            <tasks>
+              <exec command="sh">
+                <arg>echo Hello World</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <pipelines group="Infrastructure">
     <pipeline name="Infrastructure" isLocked="true">
       <environmentvariables>
         <variable name="SETTINGS_FILE">
@@ -69,5 +113,22 @@
         </jobs>
       </stage>
     </pipeline>
+    <pipeline name="QA-Update">
+      <materials>
+        <pipeline pipelineName="Infrastructure" stageName="Publish" />
+      </materials>
+      <stage name="updateConfiguration">
+        <jobs>
+          <job name="puppetUpdate">
+            <tasks>
+              <exec command="sh">
+                <arg>go node:update_qa</arg>
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
   </pipelines>
 </cruise>
+
