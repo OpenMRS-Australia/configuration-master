@@ -19,6 +19,7 @@ namespace :node do
     cap :puppet_apply, :script => puppet_bootstrap.script
   end
 
+  desc "update autotest environment"
   task :update_autotest => ['clean', 'test:puppet_syntax','package:puppet'] do |task, args|
     Ops::AWSSettings.load
     ENV['HOSTS'] = Ops::Stacks.new("autotest").instances.collect {|i| i.url}.join(",")
@@ -28,6 +29,7 @@ namespace :node do
     cap :puppet_apply, :script => puppet_bootstrap.script
   end
 
+  desc "update qa environment"
   task :update_qa => ['clean', 'test:puppet_syntax', 'package:puppet'] do |task, args|
     Ops::AWSSettings.load
     ENV['HOSTS'] = Ops::Stacks.new("qa").instances.collect {|i| i.url}.join(",")

@@ -17,4 +17,16 @@ class go::agent {
     require => Package["go-agent"]
   }
 
+  file { "/var/go/.ssh":
+    ensure => directory,
+    owner => "go",
+    group => "go",
+  }
+
+  file { "/var/go/.ssh/config":
+    source => "${work_dir}/modules/go/files/var/go/_ssh/config",
+    owner => "go",
+    group => "go",
+    mode => 0600
+  }
 }

@@ -17,7 +17,7 @@ class go::server {
     ensure => "present",
     owner  => "go",
     group  => "go",
-    source => "${work_dir}/modules/go/files/cruise-config.xml",
+    source => "${work_dir}/modules/go/files/etc/go/cruise-config.xml",
     require => Package["go-server"],
   }
 }

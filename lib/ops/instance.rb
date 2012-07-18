@@ -17,5 +17,10 @@ module Ops
       ec2 = AWS::EC2.new
       ec2.instances[@instance_id].public_dns_name
     end
+
+    def name
+      ec2 = AWS::EC2.new
+      ec2.instances[@instance_id].tags.Name
+    end
   end
 end

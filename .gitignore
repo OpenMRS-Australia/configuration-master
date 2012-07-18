@@ -4,3 +4,4 @@ settings.yaml
 .idea
 .vagrant
 todo
+.DS_Store

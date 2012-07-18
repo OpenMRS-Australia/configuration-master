@@ -15,16 +15,19 @@ namespace :aws do
     "QA" => "qa"
   }
 
-
   desc "List AWS Nodes"
   task :list do
     Ops::AWSSettings.load
     environments.each do |key, env|
       puts "#{env}:"
-      Ops::Stacks.new(env).instances.each { |i| puts "  #{i.url}" }
+      Ops::Stacks.new(env).instances.each { |i| puts "  #{i.name} => #{i.url}" }
     end
   end
 
+  desc "(Re-)Bootstrap keys for build agent access to nodes"
+  task :key_bootstrap do
+    puts "WIP"
+  end
 
   desc "creates the CI environment"
   task :ci_start => ["clean", "package:puppet"] do
