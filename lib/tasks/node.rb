@@ -47,7 +47,7 @@ namespace :node do
   end
 
   def omod_file
-    Dir.entries("omod").select{|f| f =~ /^cpm-1.0/}.first
+    Dir.entries("omod/target").select{|f| f =~ /^cpm-1.0/}.first
   end
 
   desc "(Re-)Bootstrap keys for build agent access to nodes"
