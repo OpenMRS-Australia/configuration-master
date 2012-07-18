@@ -9,11 +9,12 @@ task :puppet_apply do
 end
 
 task :deploy_omod do
-  run("#{sudo} rm -rf /tmp/omod")
-  run("#{sudo} mkdir -p /tmp/omod")
-  run("#{sudo} chmod 777 /tmp/omod")
+  temp_dir = "/tmp/omod/target"
+  run("#{sudo} rm -rf #{temp_dir}")
+  run("#{sudo} mkdir -p #{temp_dir}")
+  run("#{sudo} chmod 777 #{temp_dir}")
 
-  tempfile = transfer_file "omod/#{omod_file}"
+  tempfile = transfer_file "omod/target/#{omod_file}"
 
   module_directory = "/usr/share/tomcat6/.OpenMRS/modules"
   targetfile = "#{module_directory}/#{omod_file}"
