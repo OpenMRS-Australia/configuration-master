@@ -54,6 +54,9 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
                 <runif status="passed" />
               </exec>
             </tasks>
+            <artifacts>
+              <artifact src="**/*.omod" />
+            </artifacts>
           </job>
         </jobs>
       </stage>
