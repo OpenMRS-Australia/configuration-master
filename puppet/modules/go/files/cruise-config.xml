@@ -33,6 +33,23 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
         </jobs>
       </stage>
     </pipeline>
+    <pipeline name="CPM-Reviewer">
+      <materials>
+        <git url="https://github.com/OpenMRS-CPM/openmrs-cpm-reviewer.git" />
+      </materials>
+      <stage name="Package">
+        <jobs>
+          <job name="Package">
+            <tasks>
+              <exec command="./go">
+                <arg>clean package</arg>
+                <runif status="any" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
     <pipeline name="CI">
       <materials>
         <pipeline pipelineName="CPM-Module" stageName="Package" />
