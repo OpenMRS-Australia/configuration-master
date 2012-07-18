@@ -37,6 +37,11 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
       </stage>
     </pipeline>
     <pipeline name="CPM-Reviewer">
+      <environmentvariables>
+        <variable name="JAVA_HOME">
+          <value>/usr/java/latest</value>
+        </variable>
+      </environmentvariables>
       <materials>
         <git url="https://github.com/OpenMRS-CPM/openmrs-cpm-reviewer.git" />
       </materials>
@@ -56,7 +61,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
         </jobs>
       </stage>
     </pipeline>
-        <pipeline name="CI">
+    <pipeline name="CI">
       <materials>
         <pipeline pipelineName="CPM-Module" stageName="Package" />
         <git url="https://github.com/khaong/configuration-master" />
