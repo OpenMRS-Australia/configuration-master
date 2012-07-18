@@ -7,6 +7,9 @@ ep7gguCDI/oVN7la7fUqR/VcuHD7mYBBzkep5esxalWyw+lM/R9KwiRHkSmT&#xD;
 EpqpgdeBV/p1I6Q4VqvV14oN+iU0sbHDhBd2x0I76JGrb0BhE7ZSOtfp69J4&#xD;
 PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
 6Dg3aBCkI2VdueM7piWbiurXbfesHs1dIX4KFvXLUw==</license>
+  <security>
+    <passwordFile path="/etc/go/htpasswd" />
+  </security>
   </server>
   <pipelines group="OpenMRS-CPM">
     <pipeline name="CPM-Module" labeltemplate="${COUNT}-${git}" isLocked="true">
@@ -53,17 +56,20 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
         </jobs>
       </stage>
     </pipeline>
-    <pipeline name="CI">
+        <pipeline name="CI">
       <materials>
         <pipeline pipelineName="CPM-Module" stageName="Package" />
-        <pipeline pipelineName="Infrastructure" stageName="Publish" materialName="Infrastructure" />
+        <git url="https://github.com/khaong/configuration-master" />
       </materials>
-      <stage name="deployment">
+      <stage name="deployment" cleanWorkingDir="true">
         <jobs>
           <job name="deploy">
             <tasks>
-              <exec command="echo">
-                <arg>"Hello World"</arg>
+              <fetchartifact pipeline="CPM-Module" stage="Package" job="Package" srcdir="omod/target" dest="omod">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="./go">
+                <arg>node:deploy_omod[ec2-50-112-216-122.us-west-2.compute.amazonaws.com]</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
