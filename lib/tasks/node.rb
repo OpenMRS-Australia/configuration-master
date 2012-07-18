@@ -44,6 +44,8 @@ namespace :node do
 
     ENV['HOSTS'] = nodename
     cap :deploy_omod, :omod_file => omod_file
+
+    puts "OpenMRS has been updated - http://#{nodename}:8080/openmrs"
   end
 
   def omod_file
