@@ -38,14 +38,14 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
     </pipeline>
     <pipeline name="ProposalModule-CI" labeltemplate="${proposalModule}">
       <materials>
-        <pipeline pipelineName="CPM-Module" stageName="Package" materialName="proposalModule"/>
+        <pipeline pipelineName="ProposalModule" stageName="Package" materialName="proposalModule"/>
         <git url="https://github.com/khaong/configuration-master" materialName="buildTools"/>
       </materials>
       <stage name="deployment" cleanWorkingDir="true">
         <jobs>
           <job name="deploy">
             <tasks>
-              <fetchartifact pipeline="CPM-Module" stage="Package" job="Package" srcdir="omod/target" dest="omod">
+              <fetchartifact pipeline="ProposalModule" stage="Package" job="Package" srcdir="omod/target" dest="omod">
                 <runif status="passed" />
               </fetchartifact>
               <exec command="./go">
@@ -146,22 +146,6 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
                 <runif status="passed" />
               </fetchartifact>
               <exec command="./go" args="aws:publish_bootstrap" />
-            </tasks>
-          </job>
-        </jobs>
-      </stage>
-    </pipeline>
-    <pipeline name="QA-Update">
-      <materials>
-        <pipeline pipelineName="Infrastructure" stageName="Publish" />
-      </materials>
-      <stage name="updateConfiguration">
-        <jobs>
-          <job name="puppetUpdate">
-            <tasks>
-              <exec command="sh">
-                <arg>go node:update_qa</arg>
-              </exec>
             </tasks>
           </job>
         </jobs>
