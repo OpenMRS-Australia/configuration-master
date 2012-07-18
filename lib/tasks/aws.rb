@@ -24,11 +24,6 @@ namespace :aws do
     end
   end
 
-  desc "(Re-)Bootstrap keys for build agent access to nodes"
-  task :key_bootstrap do
-    puts "WIP"
-  end
-
   desc "creates the CI environment"
   task :ci_start => ["clean", "package:puppet"] do
     puppet_bootstrap = Ops::PuppetBootstrap.new(:role => "buildserver",

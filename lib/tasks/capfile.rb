@@ -7,3 +7,43 @@ task :puppet_apply do
   put(script, "/tmp/update.sh", :mode => "0755")
   run("#{sudo} /tmp/update.sh")
 end
+
+task :deploy_omod do
+  run("#{sudo} rm -rf /tmp/omod")
+  run("#{sudo} mkdir -p /tmp/omod")
+  run("#{sudo} chmod 777 /tmp/omod")
+
+  tempfile = transfer_file "omod/#{omod_file}"
+
+  module_directory = "/usr/share/tomcat6/.OpenMRS/modules"
+  targetfile = "#{module_directory}/#{omod_file}"
+  run("#{sudo} rm -f #{module_directory}/cpm*")
+  run("#{sudo} mv #{tempfile} #{targetfile}")
+  run("#{sudo} chown tomcat:tomcat #{targetfile}")
+  run("#{sudo} chmod 0644 #{targetfile}")
+  run("#{sudo} /sbin/service tomcat6 restart")
+end
+
+task :copy_private_key do
+  tempfile = transfer_file keyfile
+  targetfile = "/var/go/.ssh/#{keyfile}"
+
+  run("#{sudo} mv #{tempfile} #{targetfile}")
+  run("#{sudo} chown go:go #{targetfile}")
+  run("#{sudo} chmod 0600 #{targetfile}")
+end
+
+task :add_to_authorized_keys do
+  tempfile = transfer_file keyfile
+
+  # TODO: be smarter about adding lines
+  run("cat #{tempfile} >> ~/.ssh/authorized_keys")
+  run("rm #{tempfile}")
+end
+
+def transfer_file file
+  remotefile = "/tmp/#{file}"
+  put(File.open(file, "r").read, remotefile)
+
+  return remotefile
+end

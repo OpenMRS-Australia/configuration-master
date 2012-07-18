@@ -1,2 +1,3 @@
 Host *.us-west-2.compute.amazonaws.com
-    IdentityFile ~/.ssh/cpm-build
+    IdentityFile ~/.ssh/cpmbuild_id_rsa
+    User ec2-user
