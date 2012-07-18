@@ -12,7 +12,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
   </security>
   </server>
   <pipelines group="OpenMRS-CPM">
-    <pipeline name="CPM-Module" labeltemplate="${COUNT}-${git}" isLocked="true">
+    <pipeline name="ProposalModule" labeltemplate="${COUNT}-${git}" isLocked="true">
       <environmentvariables>
         <variable name="JAVA_HOME">
           <value>/usr/java/latest</value>
@@ -81,7 +81,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
     </pipeline>
   </pipelines>
   <pipelines group="OpenMRS-CPRM">
-    <pipeline name="CPM-Reviewer">
+    <pipeline name="ReviewerModule">
       <environmentvariables>
         <variable name="JAVA_HOME">
           <value>/usr/java/latest</value>
