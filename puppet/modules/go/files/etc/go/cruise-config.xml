@@ -30,7 +30,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
               </exec>
             </tasks>
             <artifacts>
-              <artifact src="**/cpm-*.omod" />
+              <artifact src="**/*.omod" />
             </artifacts>
           </job>
         </jobs>
@@ -55,7 +55,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
               </exec>
             </tasks>
             <artifacts>
-              <artifact src="**/cpm-*.omod" />
+              <artifact src="**/*.omod" />
             </artifacts>
           </job>
         </jobs>
