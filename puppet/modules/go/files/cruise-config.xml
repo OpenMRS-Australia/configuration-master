@@ -31,6 +31,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
             </tasks>
             <artifacts>
               <artifact src="**/*.omod" />
+              <artifact src="**/*jar-with-dependencies.jar" />
               <test src="omod/target/surefire-reports" />
             </artifacts>
           </job>
