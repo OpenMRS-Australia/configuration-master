@@ -12,6 +12,7 @@ require "tasks/package"
 require "rspec/core/rake_task"
 
 CLEAN.include(BUILD_DIR)
+CLEAN.include("omod")
 
 RSpec::Core::RakeTask.new(:spec)
 
