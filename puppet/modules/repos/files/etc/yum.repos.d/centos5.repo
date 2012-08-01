@@ -1,0 +1,21 @@
+[base]
+name=CentOS-5 - Base
+mirrorlist=http://mirrorlist.centos.org/?release=5&arch=i386&repo=os
+#baseurl=http://mirror.centos.org/centos/5/os/i386/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
+priority=1
+[updates]
+name=CentOS-5 - Updates
+mirrorlist=http://mirrorlist.centos.org/?release=5&arch=i386&repo=updates
+#baseurl=http://mirror.centos.org/centos/5/updates/i386/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
+priority=1
+[extras]
+name=CentOS-5 - Extras
+mirrorlist=http://mirrorlist.centos.org/?release=5&arch=i386&repo=extras
+#baseurl=http://mirror.centos.org/centos/5/extras/i386/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
+priority=1
