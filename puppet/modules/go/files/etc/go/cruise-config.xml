@@ -7,9 +7,9 @@ ep7gguCDI/oVN7la7fUqR/VcuHD7mYBBzkep5esxalWyw+lM/R9KwiRHkSmT&#xD;
 EpqpgdeBV/p1I6Q4VqvV14oN+iU0sbHDhBd2x0I76JGrb0BhE7ZSOtfp69J4&#xD;
 PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
 6Dg3aBCkI2VdueM7piWbiurXbfesHs1dIX4KFvXLUw==</license>
-  <security>
-    <passwordFile path="/etc/go/htpasswd" />
-  </security>
+    <security>
+      <passwordFile path="/etc/go/htpasswd" />
+    </security>
   </server>
   <pipelines group="OpenMRS-CPM">
     <pipeline name="ProposalModule" labeltemplate="${COUNT}-${git}" isLocked="true">
@@ -31,6 +31,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
             </tasks>
             <artifacts>
               <artifact src="**/*.omod" />
+              <artifact src="**/*jar-with-dependencies.jar" />
               <test src="omod/target/surefire-reports" />
             </artifacts>
           </job>
@@ -71,6 +72,10 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
         <jobs>
           <job name="deploy">
             <tasks>
+              <exec command="./go">
+                <arg>clean</arg>
+                <runif status="passed" />
+              </exec>
               <fetchartifact pipeline="ProposalModule-CI" stage="deployment" job="deploy" srcdir="omod/target" dest="omod">
                 <runif status="passed" />
               </fetchartifact>
