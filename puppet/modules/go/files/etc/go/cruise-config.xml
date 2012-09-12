@@ -61,6 +61,20 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
           </job>
         </jobs>
       </stage>
+      <stage name="functionalTests" cleanWorkingDir="true">
+        <jobs>
+          <job name="runTests">
+            <tasks>
+              <fetchartifact pipeline="ProposalModule" stage="Package" job="Package" srcdir="functional-tests/target">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="java">
+                <arg>-jar</arg>
+                <arg>cpm-functional-tests-*.jar</arg>
+              </exec>
+            </tasks>
+          </job>
+      </stage>
     </pipeline>
     <pipeline name="ProposalModule-QA" labeltemplate="${proposalModule-CI}.${COUNT}">
       <materials>
