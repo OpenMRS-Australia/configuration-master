@@ -74,6 +74,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
               </exec>
             </tasks>
           </job>
+        </jobs>
       </stage>
     </pipeline>
     <pipeline name="ProposalModule-QA" labeltemplate="${proposalModule-CI}.${COUNT}">
