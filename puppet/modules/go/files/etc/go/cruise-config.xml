@@ -68,9 +68,9 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
               <fetchartifact pipeline="ProposalModule" stage="Package" job="Package" srcdir="functional-tests/target">
                 <runif status="passed" />
               </fetchartifact>
-              <exec command="java">
-                <arg>-jar</arg>
-                <arg>cpm-functional-tests-*.jar</arg>
+              <exec command="bash">
+                <arg>run-functional-tests.sh</arg>
+                <runif status="passed" />
               </exec>
             </tasks>
           </job>
