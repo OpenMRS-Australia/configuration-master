@@ -64,6 +64,17 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
       <stage name="functionalTests" cleanWorkingDir="true">
         <jobs>
           <job name="runTests">
+            <environmentvariables>
+              <variable name="openmrs_username">
+                <value>admin</value>
+              </variable>
+              <variable name="openmrs_password">
+                <value>Admin123</value>
+              </variable>
+              <variable name="openmrs_server">
+                <value>ec2-50-112-216-122.us-west-2.compute.amazonaws.com:8080</value>
+              </variable>
+            </environmentvariables>
             <tasks>
               <fetchartifact pipeline="ProposalModule" stage="Package" job="Package" srcdir="functional-tests/target">
                 <runif status="passed" />
