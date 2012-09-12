@@ -69,7 +69,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
                 <value>admin</value>
               </variable>
               <variable name="openmrs_password">
-                <value>Admin123</value>
+                <value>OpenMRS1</value>
               </variable>
               <variable name="openmrs_server">
                 <value>ec2-50-112-216-122.us-west-2.compute.amazonaws.com:8080</value>
