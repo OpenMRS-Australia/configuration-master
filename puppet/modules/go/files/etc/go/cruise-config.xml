@@ -21,9 +21,9 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
       <materials>
         <git url="https://github.com/johnsyweb/openmrs-cpm.git" materialName="git" />
       </materials>
-      <stage name="Package">
+      <stage name="CompileTestPackage" cleanWorkingDir="true">
         <jobs>
-          <job name="Package">
+          <job name="CompileTestPackage">
             <tasks>
               <exec command="./go" args="clean package">
                 <runif status="passed" />
@@ -40,14 +40,14 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
     </pipeline>
     <pipeline name="ProposalModule-CI" labeltemplate="${proposalModule}.${COUNT}">
       <materials>
-        <pipeline pipelineName="ProposalModule" stageName="Package" materialName="proposalModule"/>
-        <git url="https://github.com/khaong/configuration-master" materialName="buildTools"/>
+        <pipeline pipelineName="ProposalModule" stageName="CompileTestPackage" materialName="proposalModule" />
+        <git url="https://github.com/khaong/configuration-master" materialName="buildTools" />
       </materials>
       <stage name="deployment" cleanWorkingDir="true">
         <jobs>
           <job name="deploy">
             <tasks>
-              <fetchartifact pipeline="ProposalModule" stage="Package" job="Package" srcdir="omod/target" dest="omod">
+              <fetchartifact pipeline="ProposalModule" stage="CompileTestPackage" job="CompileTestPackage" srcdir="omod/target" dest="omod">
                 <runif status="passed" />
               </fetchartifact>
               <exec command="./go">
@@ -76,7 +76,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
               </variable>
             </environmentvariables>
             <tasks>
-              <fetchartifact pipeline="ProposalModule" stage="Package" job="Package" srcdir="functional-tests/target">
+              <fetchartifact pipeline="ProposalModule" stage="CompileTestPackage" job="CompileTestPackage" srcdir="functional-tests/target">
                 <runif status="passed" />
               </fetchartifact>
               <exec command="bash">
@@ -90,8 +90,8 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
     </pipeline>
     <pipeline name="ProposalModule-QA" labeltemplate="${proposalModule-CI}.${COUNT}">
       <materials>
-        <pipeline pipelineName="ProposalModule-CI" stageName="deployment" materialName="proposalModule-CI"/>
-        <git url="https://github.com/khaong/configuration-master" materialName="buildTools"/>
+        <pipeline pipelineName="ProposalModule-CI" stageName="deployment" materialName="proposalModule-CI" />
+        <git url="https://github.com/khaong/configuration-master" materialName="buildTools" />
       </materials>
       <stage name="deployment">
         <approval type="manual" />
