@@ -10,6 +10,7 @@ class tomcat {
     owner   => "tomcat",
     purge   => true,
     recurse => true,
+    force   => true,
     require => Package["tomcat6"],
   }
 
