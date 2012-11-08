@@ -10,7 +10,7 @@ class openmrs {
   download { "/var/lib/tomcat6/webapps/openmrs.war":
     uri => "http://downloads.sourceforge.net/project/openmrs/releases/OpenMRS_1.9.1/openmrs.war",
     timeout => 900,
-    require => Package['tomcat6'],
+    require => File["/var/lib/tomcat6/webapps"],
   }
 
   file { "/usr/share/tomcat6/.OpenMRS":

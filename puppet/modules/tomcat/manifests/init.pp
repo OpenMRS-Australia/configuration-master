@@ -5,9 +5,11 @@ class tomcat {
   }
 
   file { "/var/lib/tomcat6/webapps":
-    ensure => "directory",
-    owner => "tomcat",
-    group => "tomcat",
+    ensure  => "directory",
+    group   => "tomcat",
+    owner   => "tomcat",
+    purge   => true,
+    recurse => true,
     require => Package["tomcat6"],
   }
 
