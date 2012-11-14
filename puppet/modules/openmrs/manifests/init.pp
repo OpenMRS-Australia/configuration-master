@@ -1,3 +1,4 @@
+
 define download($uri, $timeout = 300) {
   exec { "download $uri":
     command => "/usr/bin/wget -q '$uri' -O $name",
@@ -7,10 +8,24 @@ define download($uri, $timeout = 300) {
 }
 
 class openmrs {
-  download { "/var/lib/tomcat6/webapps/openmrs.war":
-    uri => "http://downloads.sourceforge.net/project/openmrs/releases/OpenMRS_1.9.1/openmrs.war",
+  $version = '1.9.1'
+  $stage = "/tmp/openmrs-${version}.war"
+  $target = '/var/lib/tomcat6/webapps/openmrs.war'
+
+  file { '/tmp':
+    ensure => 'directory',
+  }
+
+  download { $stage:
+    uri => "http://downloads.sourceforge.net/project/openmrs/releases/OpenMRS_${version}/openmrs.war",
     timeout => 900,
-    require => File["/var/lib/tomcat6/webapps"],
+    require => File["/tmp"],
+  }
+
+  file { $target:
+      ensure  => present,
+      require => [File["/var/lib/tomcat6/webapps"], Download["$stage"], ],
+      source  => $stage,
   }
 
   file { "/usr/share/tomcat6/.OpenMRS":
