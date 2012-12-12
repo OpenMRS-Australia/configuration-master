@@ -52,7 +52,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
                 <runif status="passed" />
               </fetchartifact>
               <exec command="./go">
-                <arg>node:deploy_omod[ec2-50-112-216-122.us-west-2.compute.amazonaws.com]</arg>
+                <arg>node:deploy_omod[ec2-54-245-143-28.us-west-2.compute.amazonaws.com]</arg>
                 <runif status="passed" />
               </exec>
             </tasks>
@@ -73,7 +73,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
                 <value>OpenMRS1</value>
               </variable>
               <variable name="openmrs_server">
-                <value>ec2-50-112-216-122.us-west-2.compute.amazonaws.com:8080</value>
+                <value>ec2-54-245-143-28.us-west-2.compute.amazonaws.com:8080</value>
               </variable>
             </environmentvariables>
             <tasks>
