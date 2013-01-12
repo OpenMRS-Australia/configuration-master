@@ -20,4 +20,13 @@ class go::server {
     source => "${work_dir}/modules/go/files/etc/go/cruise-config.xml",
     require => Package["go-server"],
   }
+
+  file { "/etc/default/go-server":
+    ensure => "present",
+    owner  => "root",
+    group  => "root",
+    mode   => 0644,
+    source => "${work_dir}/modules/go/files/etc/default/go-server",
+    require => Package["go-server"],
+  }
 }
