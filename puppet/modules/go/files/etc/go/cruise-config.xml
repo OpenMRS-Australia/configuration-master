@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="55">
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="60">
   <server artifactsdir="artifacts" serverId="106df03c-634c-4857-92a6-af150fbbb0d7">
     <license user="OpenMRS">XFME9J9EMiQYFddyOVzUXqqDf9VUd6c4ripA+0DLNqZzVudyysez4aiIftNM&#xD;
 wiCyWzy15KfpuGvpMtdjqY56AzASXny7L9IIAo9X21TPoTqAWhXGxTkBIF2b&#xD;
