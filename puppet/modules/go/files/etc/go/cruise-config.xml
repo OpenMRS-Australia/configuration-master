@@ -188,4 +188,8 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
       </stage>
     </pipeline>
   </pipelines>
+  <agents>
+    <agent hostname="ip-10-248-4-119" ipaddress="10.248.4.119" uuid="b040da5b-8ab7-440b-aeab-57f51b89da80" />
+  </agents>
 </cruise>
+

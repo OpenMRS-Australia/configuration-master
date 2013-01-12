@@ -38,4 +38,13 @@ class go::agent {
     group => "go",
     mode => 0600,
   }
+
+  file { "/etc/default/go-agent":
+    ensure => "present",
+    owner  => "root",
+    group  => "root",
+    mode   => 0644,
+    source => "${work_dir}/modules/go/files/etc/default/go-agent",
+    require => Package["go-agent"],
+  }
 }

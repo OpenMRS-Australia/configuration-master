@@ -5,6 +5,7 @@ class buildserver {
   include repos::centos5
   include xserver
   include firefox
+  include ruby-deps
 }
 
 include buildserver
