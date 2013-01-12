@@ -6,7 +6,7 @@ class go::agent {
 
   package { "go-agent":
     ensure => "installed",
-    source => "http://download01.thoughtworks.com/go/12.2.2/ga/go-agent-12.2.2-15235.noarch.rpm",
+    source => "http://download01.thoughtworks.com/go/12.4/update/go-agent-12.4.0-16089.noarch.rpm",
     provider => "rpm",
     require => Class["jdk"],
     notify => Service["go-agent"],
