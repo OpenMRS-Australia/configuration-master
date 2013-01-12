@@ -1,3 +1,3 @@
 rvm_install_on_use_flag=1
-rvm use jruby-1.6.7@configuration-master --create
+rvm use 1.9.3
 

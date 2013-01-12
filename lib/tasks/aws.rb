@@ -1,12 +1,12 @@
 require "uri"
 require "net/http"
-require "lib/ops/aws_settings"
-require "lib/ops/stacks"
-require "lib/ops/puppet_bootstrap"
-require "lib/ops/rolling_upgrade"
-require "lib/ops/bootstrap_package"
-require "lib/go/system_integration_pipeline"
-require "lib/go/production_deploy_pipeline"
+require_relative "../ops/aws_settings"
+require_relative "../ops/stacks"
+require_relative "../ops/puppet_bootstrap"
+require_relative "../ops/rolling_upgrade"
+require_relative "../ops/bootstrap_package"
+require_relative "../go/system_integration_pipeline"
+require_relative "../go/production_deploy_pipeline"
 
 namespace :aws do
   environments = {
