@@ -119,33 +119,6 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
       </stage>
     </pipeline>
   </pipelines>
-  <pipelines group="OpenMRS-CPRM">
-    <pipeline name="ReviewerModule">
-      <environmentvariables>
-        <variable name="JAVA_HOME">
-          <value>/usr/java/latest</value>
-        </variable>
-      </environmentvariables>
-      <materials>
-        <git url="https://github.com/OpenMRS-CPM/openmrs-cpm-reviewer.git" />
-      </materials>
-      <stage name="Package">
-        <jobs>
-          <job name="Package">
-            <tasks>
-              <exec command="./go">
-                <arg>clean package</arg>
-                <runif status="any" />
-              </exec>
-            </tasks>
-            <artifacts>
-              <artifact src="**/*.omod" />
-            </artifacts>
-          </job>
-        </jobs>
-      </stage>
-    </pipeline>
-  </pipelines>
   <pipelines group="Infrastructure">
     <pipeline name="Infrastructure" isLocked="true">
       <environmentvariables>
