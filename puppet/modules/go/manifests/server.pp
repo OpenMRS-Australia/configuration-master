@@ -3,7 +3,7 @@ class go::server {
 
   package { "go-server":
     ensure => "installed",
-    source => "http://download01.thoughtworks.com/go/12.4/update/go-server-12.4.0-16089.noarch.rpm",
+    source => "http://download01.thoughtworks.com/go/12.4.1/ga/go-server-12.4.1-16091.noarch.rpm",
     provider => "rpm",
     require => [Class["jdk"], Package["unzip"]],
   }
