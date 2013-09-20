@@ -6,6 +6,8 @@ class buildserver {
   include xserver
   include firefox
   include ruby-deps
+  include nodejs
+  include grunt
 }
 
 include buildserver
