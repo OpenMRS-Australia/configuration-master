@@ -42,7 +42,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
     <pipeline name="ProposalModule-CI" labeltemplate="${proposalModule}.${COUNT}">
       <materials>
         <pipeline pipelineName="ProposalModule" stageName="CompileTestPackage" materialName="proposalModule" />
-        <git url="https://github.com/khaong/configuration-master" materialName="buildTools" />
+        <git url="https://github.com/openmrs-australia/configuration-master" materialName="buildTools" />
       </materials>
       <stage name="deployment" cleanWorkingDir="true">
         <jobs>
@@ -95,7 +95,7 @@ PLunva9HkZ+ykVSOTHNY6NCVlRiQZmGBhzAebupXtuoMSMGMt7cVM0oS5mmt&#xD;
     <pipeline name="ProposalModule-QA" labeltemplate="${proposalModule-CI}.${COUNT}">
       <materials>
         <pipeline pipelineName="ProposalModule-CI" stageName="deployment" materialName="proposalModule-CI" />
-        <git url="https://github.com/khaong/configuration-master" materialName="buildTools" />
+        <git url="https://github.com/openmrs-australia/configuration-master" materialName="buildTools" />
       </materials>
       <stage name="deployment">
         <approval type="manual" />
