@@ -9,7 +9,7 @@ task :puppet_apply do
 end
 
 task :deploy_omod do
-  temp_dir = "/tmp/omod/target"
+  temp_dir = "/tmp/omod/libs"
   run("#{sudo} rm -rf #{temp_dir}")
   run("#{sudo} mkdir -p #{temp_dir}")
   run("#{sudo} chmod 777 #{temp_dir}")
@@ -18,7 +18,7 @@ task :deploy_omod do
 
   module_directory = "/usr/share/tomcat6/.OpenMRS/modules"
   targetfile = "#{module_directory}/#{omod_file}"
-  run("#{sudo} rm -f #{module_directory}/cpm*")
+  run("#{sudo} rm -f #{module_directory}/conceptpropose*")
   run("#{sudo} mv #{tempfile} #{targetfile}")
   run("#{sudo} chown tomcat:tomcat #{targetfile}")
   run("#{sudo} chmod 0644 #{targetfile}")

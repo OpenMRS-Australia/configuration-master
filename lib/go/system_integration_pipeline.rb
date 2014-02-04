@@ -7,7 +7,7 @@ module Go
     end
 
     def cpm_module_artifact
-      artifact_location "APP", "package", "omod/target"
+      artifact_location "APP", "package", "omod/libs"
     end
 
     def configuration_master_artifact
