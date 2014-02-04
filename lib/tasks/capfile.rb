@@ -14,7 +14,7 @@ task :deploy_omod do
   run("#{sudo} mkdir -p #{temp_dir}")
   run("#{sudo} chmod 777 #{temp_dir}")
 
-  tempfile = transfer_file "omod/target/#{omod_file}"
+  tempfile = transfer_file "omod/libs/#{omod_file}"
 
   module_directory = "/usr/share/tomcat6/.OpenMRS/modules"
   targetfile = "#{module_directory}/#{omod_file}"
