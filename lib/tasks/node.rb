@@ -49,7 +49,7 @@ namespace :node do
   end
 
   def omod_file
-    Dir.entries("conceptpropose/build/libs").select{|f| f =~ /^openmrs-module-conceptpropose-1.0/}.first
+    Dir.entries("omod/libs").select{|f| f =~ /^openmrs-module-conceptpropose-1.0/}.first
   end
 
   desc "(Re-)Bootstrap keys for build agent access to nodes"
