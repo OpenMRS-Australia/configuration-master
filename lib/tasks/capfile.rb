@@ -13,15 +13,30 @@ task :deploy_omod do
   run("#{sudo} rm -rf #{temp_dir}")
   run("#{sudo} mkdir -p #{temp_dir}")
   run("#{sudo} chmod 777 #{temp_dir}")
-
-  tempfile = transfer_file "omod/libs/#{omod_file}"
+  
 
   module_directory = "/usr/share/tomcat6/.OpenMRS/modules"
-  targetfile = "#{module_directory}/#{omod_file}"
+
+  # TODO: refactor by somebody who knows Ruby 
+  # refer to node.rb
+  #    cap :deploy_omod, :omod_file_review => [omod_file_review, omod_file_propose]
+  
+  # review
+  tempfile = transfer_file "omod/libs/#{omod_file_review}"
+  targetfile = "#{module_directory}/#{omod_file_review}"
+  run("#{sudo} rm -f #{module_directory}/conceptreview*")
+  run("#{sudo} mv #{tempfile} #{targetfile}")
+  run("#{sudo} chown tomcat:tomcat #{targetfile}")
+  run("#{sudo} chmod 0644 #{targetfile}")
+
+  # propose
+  tempfile = transfer_file "omod/libs/#{omod_file_propose}"
+  targetfile = "#{module_directory}/#{omod_file_propose}"
   run("#{sudo} rm -f #{module_directory}/conceptpropose*")
   run("#{sudo} mv #{tempfile} #{targetfile}")
   run("#{sudo} chown tomcat:tomcat #{targetfile}")
   run("#{sudo} chmod 0644 #{targetfile}")
+  
   run("#{sudo} /sbin/service tomcat6 restart")
 end
 

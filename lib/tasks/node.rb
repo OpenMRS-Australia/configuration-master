@@ -43,12 +43,17 @@ namespace :node do
     nodename = args[:nodename]
 
     ENV['HOSTS'] = nodename
-    cap :deploy_omod, :omod_file => omod_file
+    # TODO: refactor to
+    #    cap :deploy_omod, :omod_file_review => [omod_file_review, omod_file_propose]
+    cap :deploy_omod, :omod_file_review => omod_file_review, :omod_file_propose => omod_file_propose
 
     puts "OpenMRS has been updated - http://#{nodename}:8080/openmrs"
   end
 
-  def omod_file
+  def omod_file_review
+    Dir.entries("omod/libs").select{|f| f =~ /^openmrs-module-conceptreview-1.0/}.first
+  end
+  def omod_file_propose
     Dir.entries("omod/libs").select{|f| f =~ /^openmrs-module-conceptpropose-1.0/}.first
   end
 
